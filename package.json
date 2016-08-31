@@ -9,7 +9,7 @@
   "dependencies": {
     "discordie": "^0.8.1",
     "express": "^4.14.0",
-    "jsonfile": "^2.3.1",
+    "jsonfile": "^2.3.1"
   },
   "scripts": {
     "start": "node app.js"
