@@ -3,6 +3,7 @@
 ## Requirements
 - NodeJS 6.4.0
 - npm
+- A Deluge server (it can be in localhost!)
 
 ## How-to
 1. Clone this repo
