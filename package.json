@@ -1,0 +1,24 @@
+{
+  "name": "Legionary",
+  "version": "1.0.0",
+  "description": "A small Discord bot to add torrents to a Deluge Server.",
+  "main": "index.js",
+  "dependencies" : {
+  	"fs" : "*",
+  	"jsonfile" : "*",
+  	"discordie" : "*",
+  	"deluge" : "*",
+  	"magnet-uri" : "*",
+  	"htmlparser2" : "*",
+  	"request" : "*"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Bonny1992",
+  "license": "ISC",
+  "dependencies": {
+    "discordie": "^0.8.1",
+    "jsonfile": "^2.3.1"
+  }
+}
