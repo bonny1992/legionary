@@ -109,8 +109,7 @@ var Discordie = require("discordie");
 var client = new Discordie();
 
 client.connect({
-  // replace this sample token
-  token: "MjE5ODQ4NzUyMzM5NDg0Njcy.CqYdfw.vb5Qh7V5I6zw9ZwCr4puR95NxKE"
+  token: "YOUR TOKEN HERE"
 });
 
 client.Dispatcher.on("GATEWAY_READY", e => {
