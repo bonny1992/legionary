@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A small Discord bot to add torrents to a Deluge Server.",
   "main": "index.js",
+  "engines": {
+    "node": "6.4.0"
+  },
   "dependencies" : {
   	"fs" : "*",
   	"jsonfile" : "*",
