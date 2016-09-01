@@ -217,10 +217,10 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 																e.message.channel.sendMessage(`${e.message.author.mention}: Non è stato possibile aggiungere il torrent!`);
 															}
 															else {
-																console.log(result);
 																const magnet = require('magnet-uri');
 																const parsed = magnet.decode(message[1]);
 																const log_string = `${e.message.author.username} ha aggiunto il torrent ${parsed.dn}`;
+																fs.appendFileSync('public/logs.html',log_string);
 																console.log(log_string);
 																const big_message = `${e.message.author.mention}: È stato aggiunto il torrent con magnet\n\n\`\`\`${message[1]}\`\`\`\ncon titolo **${parsed.dn}** con successo!`;
 																e.message.channel.sendMessage(big_message);
