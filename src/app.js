@@ -228,7 +228,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 												});
 											}
 											else {
-												const big_message = `${e.message.author.mention}: Per utilizzare questo comando, devi seguire questa sintassi:\n*|addurl url label*\ndove:\n**url** è il magnet o il link diretto al torrent desiderato\n**label** è una delle label predefinite, ottenibili tramite il comando |labels`;
+												const big_message = `${e.message.author.mention}: Per utilizzare questo comando, devi seguire questa sintassi:\n*|addurl url label*\ndove:\n**url** è il magnet o il link diretto al torrent desiderato\n**label** è una delle label predefinite, ottenibili tramite il comando \`|labels\``;
 												e.message.channel.sendMessage(big_message);
 											}
 											
