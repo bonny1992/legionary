@@ -260,12 +260,15 @@ app.set('view engine', 'pug');
 app.use('/public', express.static(`${__dirname}/../public`));
 
 app.get('/', (request, response) => {
+	const time_b = new Date();
+	const current_time = `${time_b.getHours()}:${time_b.getMinutes()}:${time_b.getSeconds()}`;
 	response.render('index', 
 		{ 
 			title: 'Legionary',
 			message_a: 'A small Discord bot to manage a Deluge torrent server. Written in NodeJS!',
 			message_b: commands_runned,
-			message_c: time_executed
+			message_c: time_executed,
+			message_d: current_time
 		});
 });
 
