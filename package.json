@@ -13,7 +13,8 @@
     "deluge" : "*",
     "magnet-uri" : "*",
     "htmlparser2" : "*",
-    "request" : "*"
+    "request" : "*",
+    "node-markdown": "*"
   },
   "scripts": {
     "start": "node app.js"
