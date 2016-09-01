@@ -7,14 +7,15 @@
     "node": "6.4.0"
   },
   "dependencies": {
+    "deluge": "*",
     "discordie": "^0.8.1",
     "express": "^4.14.0",
+    "htmlparser2": "*",
     "jsonfile": "^2.3.1",
-    "deluge" : "*",
-    "magnet-uri" : "*",
-    "htmlparser2" : "*",
-    "request" : "*",
-    "node-markdown": "*"
+    "magnet-uri": "*",
+    "marked": "^0.3.6",
+    "node-markdown": "*",
+    "request": "*"
   },
   "scripts": {
     "start": "node app.js"

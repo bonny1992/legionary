@@ -1,6 +1,7 @@
 var fs = require('fs');
 var commands_runned = 0;
-
+var time = new Date();
+var time_executed = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
 
 var readSettings = function() {
 	var jsonfile = require('jsonfile');
@@ -259,11 +260,12 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(request, response) {
-	md_parser = require("node-markdown").Markdown;
-	var html = md_parser('# Legionary\n \
+	var marked = require('marked');
+	var html = marked('# Legionary\n \
 			*A small Discord bot to manage a Deluge torrent server. Written in NodeJS!*\n \
 			Commands runned successifully: `' + commands_runned + '`\n \
-			since last restart.');
+			since last restart.\n\n \
+			Script started `' + time_executed + '`');
   	response.send(html);
 });
 
