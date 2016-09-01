@@ -182,7 +182,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 				case '!labels':
 					checkSettingsChannel(settings, channel_settings_condition => {
 						if(channel_settings_condition) 
-							e.message.channel.sendMessage(`${e.message.author.mention}: Non hai ancora eseguito il comando **|setchannel**!`);
+							e.message.channel.sendMessage(`${e.message.author.mention}: Non hai ancora eseguito il comando **!setchannel**!`);
 						else
 							{
 								checkOriginChannel(e.message.channel, settings['torrent_channel'], origin_condition => {
@@ -202,7 +202,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 				case '!addurl':
 					checkSettingsChannel(settings, channel_settings_condition => {
 						if(channel_settings_condition) 
-							e.message.channel.sendMessage(`${e.message.author.mention}: Non hai ancora eseguito il comando **|setchannel**!`);
+							e.message.channel.sendMessage(`${e.message.author.mention}: Non hai ancora eseguito il comando **!setchannel**!`);
 						else
 							{
 								checkOriginChannel(e.message.channel, settings['torrent_channel'], origin_condition => {
