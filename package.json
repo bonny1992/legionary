@@ -1,11 +1,8 @@
 {
   "name": "Legionary",
   "version": "1.0.0",
-  "description": "A small Discord bot to add torrents to a Deluge Server.",
-  "main": "app.js",
-  "engines": {
-    "node": "6.4.0"
-  },
+  "description": "A small Discord bot to add torrents to a Deluge or qBittorrent Server.",
+  "main": "lib/index.js",
   "dependencies": {
     "deluge": "*",
     "discordie": "^0.8.1",
@@ -15,11 +12,24 @@
     "magnet-uri": "*",
     "marked": "^0.3.6",
     "node-markdown": "*",
-    "request": "*"
+    "request": "*",
+    "qbittorrent-client": "*",
+    "pug" : "*"
   },
   "scripts": {
-    "start": "node app.js"
+    "build": "babel src -d lib",
+    "start": "npm run build && babel-node lib/app.js --presets es2015"
   },
   "author": "Bonny1992",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-core": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
 }

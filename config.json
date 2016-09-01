@@ -1,1 +1,1 @@
-{"torrent_channel":"torrents","torrent_role":"Torrents enabled","delugeUrl":"http://94.23.150.27:8112/json","delugePassword":"admin"}
+{"token":"MjE5ODQ4NzUyMzM5NDg0Njcy.CqnX3A.9UOwnqIdkKDrowMXH2YQ-CeG3_M","torrent_channel":"torrents","torrent_role":"Torrents enabled","torrent_server":"deluge","delugeUrl":"94.23.150.27:8112/json","delugePassword":"admin","qbHost":"127.0.0.1","qbPort":"8080","qbUsername":"admin","qbPassword":"password"}

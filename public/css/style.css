@@ -1,0 +1,26 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+
+a {
+  color: #00B7FF;
+}
+
+
+div.control.commands {
+  width: 10px;
+  padding: 10px;
+  background-color: lightgrey;
+  color: grey;
+  word-wrap: break-word;
+}
+
+div.control.hours {
+  width: 60px;
+  padding: 10px;
+  background-color: lightgrey;
+  color: grey;
+  word-wrap: break-word;
+}
