@@ -132,7 +132,7 @@ client.Dispatcher.on("GATEWAY_READY", e => {
 });
 
 client.Dispatcher.on("MESSAGE_CREATE", e => {
-	if(e.message.content.split(' ')[0] == '|bestemmia')
+	if(e.message.content.split(' ')[0] == '!bestemmia')
 		bestParser(text => {
 			if(text != undefined)
 				e.message.channel.sendMessage(`\`${text}\``);
