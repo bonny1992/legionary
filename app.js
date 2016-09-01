@@ -1,4 +1,6 @@
 var fs = require('fs');
+var commands_runned = 0;
+
 
 var readSettings = function() {
 	var jsonfile = require('jsonfile');
@@ -124,6 +126,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 	if(e.message.content.split(' ')[0] == '|bestemmia')
 		bestParser(function(text) {
 			if(text != undefined)
+				commands_runned++;
 				e.message.channel.sendMessage('`' + text + '`');
 			});
 	checkRoles(e.message.author.memberOf(e.message.guild).roles, settings['torrent_role'], function(roles_condition) {
@@ -140,6 +143,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 				// ###############################################################
 				// ###############################################################
 				case '|checkperm':
+					commands_runned++;
 					e.message.channel.sendMessage(e.message.author.mention + ': Fai parte del ruolo ' + settings['torrent_role']);
 					break;
 				case '|setchannel':
@@ -149,6 +153,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 								if(length_condition) {
 									checkChannels(e.message.guild.channels, message[1], '0', function(channel_condition) {
 										if(channel_condition) {
+											commands_runned++;
 											settings['torrent_channel'] = message[1];
 											e.message.channel.sendMessage(e.message.author.mention + ': Hai impostato con successo il canale **' + message[1] + '** come predefinito per i torrent!');
 											writeSettings(settings);
@@ -162,6 +167,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 							});
 						}
 						else {
+							commands_runned++;
 							e.message.channel.sendMessage(e.message.author.mention + ': Hai cancellato con successo il canale **' + settings['torrent_channel'] + '** come predefinito per i torrent!');
 							settings['torrent_channel'] = 'none';
 							writeSettings(settings);
@@ -181,7 +187,8 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 											Object.keys(labels).forEach(function (label) {
 												big_message += label + '\n';
 											});
-											big_message += '```'
+											big_message += '```';
+											commands_runned++;
 											e.message.channel.sendMessage(big_message);
 										}
 									});
@@ -210,6 +217,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 														var magnet = require('magnet-uri');
 														var parsed = magnet.decode(message[1]);
 														var big_message = e.message.author.mention +": È stato aggiunto il torrent con magnet\n\n```" + message[1] + "```\ncon titolo **" + parsed.dn + "** con successo!";
+														commands_runned++;
 														e.message.channel.sendMessage(big_message);
 													}
 													else
@@ -219,6 +227,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 											}
 											else {
 												var big_message = e.message.author.mention + ': Per utilizzare questo comando, devi seguire questa sintassi:\n*|addurl url label*\ndove:\n**url** è il magnet o il link diretto al torrent desiderato\n**label** è una delle label predefinite';
+												commands_runned++;
 												e.message.channel.sendMessage(big_message);
 											}
 											
@@ -252,7 +261,8 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function(request, response) {
 	md_parser = require("node-markdown").Markdown;
 	var html = md_parser('# Legionary\n \
-			*A small Discord bot to manage a Deluge torrent server. Written in NodeJS!*');
+			*A small Discord bot to manage a Deluge torrent server. Written in NodeJS!*\n \
+			Commands runned successifully: `' + commands_runned + '`');
   	response.send(html);
 });
 
