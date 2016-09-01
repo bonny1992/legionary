@@ -251,7 +251,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(request, response) {
 	md_parser = require("node-markdown").Markdown;
-	var html = md_parser('# Legionary \
+	var html = md_parser('# Legionary\n \
 			*A small Discord bot to manage a Deluge torrent server. Written in NodeJS!*');
   	response.send(html);
 });
