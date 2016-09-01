@@ -261,7 +261,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(request, response) {
 	var marked = require('marked');
-	var string = '# Legionary\n*A small Discord bot to manage a Deluge torrent server. Written in NodeJS!* \nCommands runned successifully: `' + commands_runned + '`\nsince last restart.\n\nScript started `' + time_executed + '`	';
+	var string = '#Legionary\n\n*A small Discord bot to manage a Deluge torrent server. Written in NodeJS!*\n\nCommands runned successifully: `' + commands_runned + '`\n\nsince last restart.\n\nScript started `' + time_executed + '`	';
 	var html = marked(string);
   	response.send(html);
 });
