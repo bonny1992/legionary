@@ -262,7 +262,8 @@ app.get('/', function(request, response) {
 	md_parser = require("node-markdown").Markdown;
 	var html = md_parser('# Legionary\n \
 			*A small Discord bot to manage a Deluge torrent server. Written in NodeJS!*\n \
-			Commands runned successifully: `' + commands_runned + '`');
+			Commands runned successifully: `' + commands_runned + '`\n \
+			since last restart.');
   	response.send(html);
 });
 
