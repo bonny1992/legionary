@@ -2,6 +2,16 @@ import fs from 'fs';
 const commands_runned = 0;
 const time = new Date();
 const time_executed = `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
+let timer;
+
+
+const KeepAlive = () => {
+	const currentdate = new Date(); 
+	const datetime = `KeepAlive: ${currentdate.getDate()}/${currentdate.getMonth()+1}/${currentdate.getFullYear()} @ ${currentdate.getHours()}:${currentdate.getMinutes()}:${currentdate.getSeconds()}`;
+	console.log(datetime);
+}
+
+
 
 const readSettings = () => {
 	const jsonfile = require('jsonfile');
@@ -137,6 +147,14 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 			if(text != undefined)
 				e.message.channel.sendMessage(`\`${text}\``);
 			});
+	else if(e.message.content.split(' ')[0] == '!keepalive') {
+		if(timer) {
+			clearTimeout(timer);
+		}
+		else {
+			timer = setTimeout(KeepAlive(), 1680000);
+		}
+	}
 	checkRoles(e.message.author.memberOf(e.message.guild).roles, settings['torrent_role'], roles_condition => {
 		if(roles_condition) {
 			const message = e.message.content.split(' ');
