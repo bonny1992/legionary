@@ -151,14 +151,14 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 		if(timer) {
 			clearTimeout(timer);
 			timer = "";
-			e.message.channel.sendMessage(`${e.message.author.mention}: Hai disattivato con successo il comando di keepalive!`);
+			e.message.channel.sendMessage(`${e.message.author.mention}: Hai disattivato con successo il comando di \`keepalive\`!`);
 			console.log(`Log: Keepalive disabled`);
 		}
 		else {
 			timer = setTimeout(() => {
 				KeepAlive();
 			}, 1680000);
-			e.message.channel.sendMessage(`${e.message.author.mention}: Hai attivato con successo il comando di keepalive, che **dovrebbe** mantenere acceso il bot su Heroku!`);
+			e.message.channel.sendMessage(`${e.message.author.mention}: Hai attivato con successo il comando di \`keepalive\`, che **dovrebbe** mantenere acceso il bot su Heroku!`);
 			console.log(`Log: Keepalive enabled`);	
 		}
 	}
