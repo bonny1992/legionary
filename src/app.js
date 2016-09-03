@@ -1,5 +1,9 @@
 import fs from 'fs';
 import ping from 'ping';
+import request from 'request';
+import unirest from 'unirest';
+import url from 'url';
+import path from 'path';
 const commands_runned = 0;
 const time = new Date();
 const time_executed = `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
@@ -124,6 +128,26 @@ const bestParser = callback => {
 	});
 };
 
+const download = (uri, filename, callback) => {
+  request.head(uri, (err, res, body) => {
+    request(uri).pipe(fs.createWriteStream(`./img_temp/${filename}`)).on('close', callback);
+  });
+};
+
+const hsParser = (cardname, callback) => {
+	console.log(`GET https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/${cardname}?locale=itIT`);
+	unirest.get(`https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/${cardname}?locale=itIT`)
+	.header("X-Mashape-Key", "QNONu0GxUCmshtEPsWRc3xvZ2EYup11KhpejsnUWCeuk7rphhd")
+	.end(function (result) {
+		if(result.status != '200')
+			callback(false,false);
+		else {
+			callback(true, result.body)
+		}
+	});
+}
+
+
 
 
 const settings = readSettings();
@@ -167,6 +191,37 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 			console.log(`Log: Keepalive enabled | ${milliseconds.getMinutes()} m`);	
 		}
 	}
+	else if(e.message.content.split(' ')[0] == '!hs') {
+		var parameter = "";
+		if(e.message.content.split(' ').length > 2) {
+			for(var i=1; i<e.message.content.split(' ').length; i++)
+				parameter += e.message.content.split(' ')[i] + '%20';
+			parameter = parameter.substring(0, parameter.length - 3);
+		}
+		else 
+			parameter = e.message.content.split(' ')[1];
+		hsParser(parameter, (found, response) => {
+				if(found) {
+					var message = "";
+					if(response.length > 1)
+						message = `${e.message.author.mention}: Sono stati trovati \`${response.length}\` per la chiave di ricerca \`${parameter}\`.\n`;
+					else
+						message = `${e.message.author.mention}: È stato trovato \`${response.length}\` per la chiave di ricerca \`${parameter}\`.\n`
+					const img = response[0].img;
+					const filename = path.basename(url.parse(img).pathname);
+					download(img, filename, () => {
+					  e.message.channel.uploadFile(`./img_temp/${filename}`, filename , message);
+					  fs.unlink(`./img_temp/${filename}`);
+					});
+				}
+				else {
+					var message = `${e.message.author.mention}: Sono stati trovati \`0\` per la chiave di ricerca \`${parameter}\`.\n`;
+					e.message.channel.sendMessage(message);
+				}
+			});
+		}
+
+
 	checkRoles(e.message.author.memberOf(e.message.guild).roles, settings['torrent_role'], roles_condition => {
 		if(roles_condition) {
 			const message = e.message.content.split(' ');
