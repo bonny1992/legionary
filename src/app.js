@@ -1,4 +1,5 @@
 import fs from 'fs';
+import ping from 'ping';
 const commands_runned = 0;
 const time = new Date();
 const time_executed = `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
@@ -6,9 +7,12 @@ let timer;
 
 
 const KeepAlive = () => {
-	const currentdate = new Date(); 
-	const datetime = `KeepAlive: ${currentdate.getDate()}/${currentdate.getMonth()+1}/${currentdate.getFullYear()} @ ${currentdate.getHours()}:${currentdate.getMinutes()}:${currentdate.getSeconds()}`;
-	console.log(datetime);
+	const host = 'www.google.com';
+	ping.sys.probe(host, (isAlive) => {
+		const currentdate = new Date(); 
+		const datetime = `KeepAlive: ${currentdate.getDate()}/${currentdate.getMonth()+1}/${currentdate.getFullYear()} @ ${currentdate.getHours()}:${currentdate.getMinutes()}:${currentdate.getSeconds()}`;
+		console.log(datetime);
+	});
 }
 
 

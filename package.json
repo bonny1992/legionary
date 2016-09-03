@@ -14,7 +14,8 @@
     "node-markdown": "*",
     "request": "*",
     "qbittorrent-client": "*",
-    "pug" : "*"
+    "pug" : "*",
+    "ping": "*"
   },
   "scripts": {
     "build": "babel src -d lib",
