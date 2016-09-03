@@ -201,6 +201,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 		else 
 			parameter = e.message.content.split(' ')[1];
 		hsParser(parameter, (found, response) => {
+				parameter = parameter.replace('%20', ' ');
 				if(found) {
 					var message = "";
 					if(response.length > 1)
