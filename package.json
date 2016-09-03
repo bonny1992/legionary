@@ -15,7 +15,8 @@
     "request": "*",
     "qbittorrent-client": "*",
     "pug" : "*",
-    "ping": "*"
+    "ping": "*",
+    "unirest": "*"
   },
   "scripts": {
     "build": "babel src -d lib",
