@@ -157,7 +157,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 		else {
 			timer = setTimeout(() => {
 				KeepAlive();
-			}, 1680000);
+			}, 600000);
 			e.message.channel.sendMessage(`${e.message.author.mention}: Hai attivato con successo il comando di \`keepalive\`, che **dovrebbe** mantenere acceso il bot su Heroku!`);
 			console.log(`Log: Keepalive enabled`);	
 		}
