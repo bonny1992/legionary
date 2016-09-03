@@ -164,7 +164,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 			}, 600000);
 			e.message.channel.sendMessage(`${e.message.author.mention}: Hai attivato con successo il comando di \`keepalive\`, che **dovrebbe** mantenere acceso il bot su Heroku!`);
 			var milliseconds = new Date(600000);
-			console.log(`Log: Keepalive enabled | ${milliseconds.getMinutes()} s`);	
+			console.log(`Log: Keepalive enabled | ${milliseconds.getMinutes()} m`);	
 		}
 	}
 	checkRoles(e.message.author.memberOf(e.message.guild).roles, settings['torrent_role'], roles_condition => {
