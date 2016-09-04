@@ -240,6 +240,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 							  	e.message.channel.sendMessage(other_cards);
 							  }
 							  fs.unlink(`./img_temp/${filename}`);
+							  console.log(`DELETED ./img_temp/${filename}`);
 							});
 						}
 						else {
