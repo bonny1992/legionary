@@ -209,19 +209,24 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 					else
 						message = `${e.message.author.mention}: È stato trovato \`${response.length}\` per la chiave di ricerca \`${parameter}\`.\n`
 					let i = 0;
-					do {
-						if(response[i].hasOwnProperty('img')) {
-							let img = response[i].img;
+					response.forEach((instance) => {
+						if(instance.hasOwnProperty('img'))
+						{
+							let img = instance.img;
+							break;
 						}
-						else
-							i++;
-					}
-					while(response[i] != undefined);
-					const filename = path.basename(url.parse(img).pathname);
-					download(img, filename, () => {
-					  e.message.channel.uploadFile(`./img_temp/${filename}`, filename , message);
-					  fs.unlink(`./img_temp/${filename}`);
 					});
+					if(img != undefined) {
+						const filename = path.basename(url.parse(img).pathname);
+						download(img, filename, () => {
+						  e.message.channel.uploadFile(`./img_temp/${filename}`, filename , message);
+						  fs.unlink(`./img_temp/${filename}`);
+						});
+					}
+					else {
+						var message = `${e.message.author.mention}: Non sono state trovate immagini per la chiave di ricerca \`${parameter}\`.\n`;
+						e.message.channel.sendMessage(message);
+					}
 				}
 				else {
 					var message = `${e.message.author.mention}: Sono stati trovati \`0\` per la chiave di ricerca \`${parameter}\`.\n`;
