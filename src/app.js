@@ -139,6 +139,7 @@ const hsParser = (cardname, callback) => {
 	unirest.get(`https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/${cardname}?locale=itIT`)
 	.header("X-Mashape-Key", "QNONu0GxUCmshtEPsWRc3xvZ2EYup11KhpejsnUWCeuk7rphhd")
 	.end(function (result) {
+		console.log(result.body);
 		if(result.status != '200')
 			callback(false,false);
 		else {
