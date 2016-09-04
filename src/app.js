@@ -192,65 +192,67 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 		}
 	}
 	else if(e.message.content.split(' ')[0] == '!hs') {
-		var parameter = "";
 		if(e.message.content.split(' ').length == 1) {
 			let only_one_command = `${e.message.author.mention}: Per utilizzare questo comando, devi seguire questa sintassi:\n\`!hs card name\`\ndove:\n**card name** è il nome della carta che vuoi cercare!`;
 			e.message.channel.sendMessage(only_one_command);
 		}
-		if(e.message.content.split(' ').length > 2) {
-			for(var i=1; i<e.message.content.split(' ').length; i++)
-				parameter += e.message.content.split(' ')[i] + '%20';
-			parameter = parameter.substring(0, parameter.length - 3);
-		}
-		else 
-			parameter = e.message.content.split(' ')[1];
-		hsParser(parameter, (found, response) => {
-				parameter = parameter.replace(/%20/g, ' ');
-				if(found) {
-					var message = "";
-					let img;
-					if(response.length > 1)
-						message = `${e.message.author.mention}: Sono stati trovati \`${response.length}\` risultati per la chiave di ricerca \`${parameter}\`.\n`;
-					else
-						message = `${e.message.author.mention}: È stato trovato \`${response.length}\` risultato per la chiave di ricerca \`${parameter}\`.\n`
-					let i = 0;
-					response.forEach((instance) => {
-						if(instance.hasOwnProperty('img'))
-						{
-							img = instance.img;
-							return;
-						}
-					});
-					if(img != undefined) {
-						const filename = path.basename(url.parse(img).pathname);
-						download(img, filename, () => {
-						  e.message.channel.uploadFile(`./img_temp/${filename}`, filename , message);
-						  if(response.length > 1 && response.length < 51) {
-						  	let other_cards = `Tutti i risultati: \n\`\`\``;
-						  	response.forEach((card) => {
-						  		other_cards += `${card.name}\n`;
-						  	});
-						  	other_cards += `\`\`\``;
-						  	e.message.channel.sendMessage(other_cards);
-						  }
-						  else if (response.length > 50) {
-						  	let other_cards = `Troppi risultati per visualizzarne una lista!`;
-						  	e.message.channel.sendMessage(other_cards);
-						  }
-						  fs.unlink(`./img_temp/${filename}`);
+		else {
+			var parameter = "";
+			if(e.message.content.split(' ').length > 2) {
+				for(var i=1; i<e.message.content.split(' ').length; i++)
+					parameter += e.message.content.split(' ')[i] + '%20';
+				parameter = parameter.substring(0, parameter.length - 3);
+			}
+			else 
+				parameter = e.message.content.split(' ')[1];
+			hsParser(parameter, (found, response) => {
+					parameter = parameter.replace(/%20/g, ' ');
+					if(found) {
+						var message = "";
+						let img;
+						if(response.length > 1)
+							message = `${e.message.author.mention}: Sono stati trovati \`${response.length}\` risultati per la chiave di ricerca \`${parameter}\`.\n`;
+						else
+							message = `${e.message.author.mention}: È stato trovato \`${response.length}\` risultato per la chiave di ricerca \`${parameter}\`.\n`
+						let i = 0;
+						response.forEach((instance) => {
+							if(instance.hasOwnProperty('img'))
+							{
+								img = instance.img;
+								return;
+							}
 						});
+						if(img != undefined) {
+							const filename = path.basename(url.parse(img).pathname);
+							download(img, filename, () => {
+							  e.message.channel.uploadFile(`./img_temp/${filename}`, filename , message);
+							  if(response.length > 1 && response.length < 51) {
+							  	let other_cards = `Tutti i risultati: \n\`\`\``;
+							  	response.forEach((card) => {
+							  		other_cards += `${card.name}\n`;
+							  	});
+							  	other_cards += `\`\`\``;
+							  	e.message.channel.sendMessage(other_cards);
+							  }
+							  else if (response.length > 50) {
+							  	let other_cards = `Troppi risultati per visualizzarne una lista!`;
+							  	e.message.channel.sendMessage(other_cards);
+							  }
+							  fs.unlink(`./img_temp/${filename}`);
+							});
+						}
+						else {
+							var message = `${e.message.author.mention}: Non sono state trovate immagini per la chiave di ricerca \`${parameter}\`.\n`;
+							e.message.channel.sendMessage(message);
+						}
 					}
 					else {
-						var message = `${e.message.author.mention}: Non sono state trovate immagini per la chiave di ricerca \`${parameter}\`.\n`;
+						var message = `${e.message.author.mention}: Sono stati trovati \`0\` risultati per la chiave di ricerca \`${parameter}\`.\n`;
 						e.message.channel.sendMessage(message);
 					}
-				}
-				else {
-					var message = `${e.message.author.mention}: Sono stati trovati \`0\` risultati per la chiave di ricerca \`${parameter}\`.\n`;
-					e.message.channel.sendMessage(message);
-				}
-			});
+				});
 		}
+	}
 
 
 	checkRoles(e.message.author.memberOf(e.message.guild).roles, settings['torrent_role'], roles_condition => {
