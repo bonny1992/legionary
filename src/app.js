@@ -209,7 +209,10 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 					else
 						message = `${e.message.author.mention}: È stato trovato \`${response.length}\` per la chiave di ricerca \`${parameter}\`.\n`
 					const img = response[0].img;
-					fs.writeFileSync('./public/response.json', response[0]);
+					const jsonfile = require('jsonfile');
+					const file = './public/response.json';
+					const obj = response[0];
+					jsonfile.writeFileSync(file, obj);
 					/*const filename = path.basename(url.parse(img).pathname);
 					download(img, filename, () => {
 					  e.message.channel.uploadFile(`./img_temp/${filename}`, filename , message);
