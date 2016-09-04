@@ -201,9 +201,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 		else 
 			parameter = e.message.content.split(' ')[1];
 		hsParser(parameter, (found, response) => {
-				console.log(parameter);
-				parameter = parameter.replace('%20', ' ');
-				console.log(parameter);
+				parameter = parameter.replace(/%20/g, ' ');
 				if(found) {
 					var message = "";
 					let img;
