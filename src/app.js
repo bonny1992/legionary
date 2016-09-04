@@ -208,12 +208,15 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 						message = `${e.message.author.mention}: Sono stati trovati \`${response.length}\` per la chiave di ricerca \`${parameter}\`.\n`;
 					else
 						message = `${e.message.author.mention}: È stato trovato \`${response.length}\` per la chiave di ricerca \`${parameter}\`.\n`
-					let img = response[0].img;
-					let i = 1;
-					while(img != "undefined") {
-						img = response[i].img;
-						i++;
+					let i = 0;
+					do {
+						if(response[i].hasOwnProperty('img')) {
+							let img = response[i].img;
+						}
+						else
+							i++;
 					}
+					while(response[i] != undefined);
 					const filename = path.basename(url.parse(img).pathname);
 					download(img, filename, () => {
 					  e.message.channel.uploadFile(`./img_temp/${filename}`, filename , message);
