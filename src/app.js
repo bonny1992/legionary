@@ -233,6 +233,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 							  	});
 							  	other_cards += `\`\`\``;
 							  	e.message.channel.sendMessage(other_cards);
+							  	fs.unlink(`./img_temp/${filename}`);
 							  }
 							  else if (response.length > 50) {
 							  	let other_cards = `Troppi risultati per visualizzarne una lista!`;
