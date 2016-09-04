@@ -239,8 +239,6 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 							  	let other_cards = `Troppi risultati per visualizzarne una lista!`;
 							  	e.message.channel.sendMessage(other_cards);
 							  }
-							  fs.unlink(`./img_temp/${filename}`);
-							  console.log(`DELETED ./img_temp/${filename}`);
 							});
 						}
 						else {
