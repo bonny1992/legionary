@@ -204,6 +204,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 				parameter = parameter.replace('%20', ' ');
 				if(found) {
 					var message = "";
+					let img;
 					if(response.length > 1)
 						message = `${e.message.author.mention}: Sono stati trovati \`${response.length}\` per la chiave di ricerca \`${parameter}\`.\n`;
 					else
@@ -212,8 +213,8 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 					response.forEach((instance) => {
 						if(instance.hasOwnProperty('img'))
 						{
-							let img = instance.img;
-							break;
+							img = instance.img;
+							return;
 						}
 					});
 					if(img != undefined) {
