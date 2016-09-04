@@ -221,12 +221,16 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 						const filename = path.basename(url.parse(img).pathname);
 						download(img, filename, () => {
 						  e.message.channel.uploadFile(`./img_temp/${filename}`, filename , message);
-						  if(response.length > 1 && < 51) {
+						  if(response.length > 1 && response.length < 51) {
 						  	let other_cards = `Tutti i risultati: \n\`\`\``;
 						  	response.forEach((card) => {
 						  		other_cards += `${card.name}\n`;
 						  	});
 						  	other_cards += `\`\`\``;
+						  	e.message.channel.sendMessage(other_cards);
+						  }
+						  else if (response.length > 50) {
+						  	let other_cards = `Troppi risultati per visualizzarne una lista!`;
 						  	e.message.channel.sendMessage(other_cards);
 						  }
 						  fs.unlink(`./img_temp/${filename}`);
