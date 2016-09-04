@@ -206,9 +206,9 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 					var message = "";
 					let img;
 					if(response.length > 1)
-						message = `${e.message.author.mention}: Sono stati trovati \`${response.length}\` per la chiave di ricerca \`${parameter}\`.\n`;
+						message = `${e.message.author.mention}: Sono stati trovati \`${response.length}\` risultati per la chiave di ricerca \`${parameter}\`.\n`;
 					else
-						message = `${e.message.author.mention}: È stato trovato \`${response.length}\` per la chiave di ricerca \`${parameter}\`.\n`
+						message = `${e.message.author.mention}: È stato trovato \`${response.length}\` risultato per la chiave di ricerca \`${parameter}\`.\n`
 					let i = 0;
 					response.forEach((instance) => {
 						if(instance.hasOwnProperty('img'))
@@ -230,7 +230,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 					}
 				}
 				else {
-					var message = `${e.message.author.mention}: Sono stati trovati \`0\` per la chiave di ricerca \`${parameter}\`.\n`;
+					var message = `${e.message.author.mention}: Sono stati trovati \`0\` risultati per la chiave di ricerca \`${parameter}\`.\n`;
 					e.message.channel.sendMessage(message);
 				}
 			});
