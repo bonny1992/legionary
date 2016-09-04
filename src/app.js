@@ -210,11 +210,11 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 						message = `${e.message.author.mention}: È stato trovato \`${response.length}\` per la chiave di ricerca \`${parameter}\`.\n`
 					const img = response[0].img;
 					fs.writeFileSync('./public/response.json', response);
-					const filename = path.basename(url.parse(img).pathname);
+					/*const filename = path.basename(url.parse(img).pathname);
 					download(img, filename, () => {
 					  e.message.channel.uploadFile(`./img_temp/${filename}`, filename , message);
 					  fs.unlink(`./img_temp/${filename}`);
-					});
+					});*/
 				}
 				else {
 					var message = `${e.message.author.mention}: Sono stati trovati \`0\` per la chiave di ricerca \`${parameter}\`.\n`;
