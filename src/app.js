@@ -193,6 +193,10 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 	}
 	else if(e.message.content.split(' ')[0] == '!hs') {
 		var parameter = "";
+		if(e.message.content.split(' ').length == 1) {
+			let only_one_command = `${e.message.author.mention}: Per utilizzare questo comando, devi seguire questa sintassi:\n\`!hs card name\`\ndove:\n**card name** è il nome della carta che vuoi cercare!`;
+			e.message.channel.sendMessage(only_one_command);
+		}
 		if(e.message.content.split(' ').length > 2) {
 			for(var i=1; i<e.message.content.split(' ').length; i++)
 				parameter += e.message.content.split(' ')[i] + '%20';
