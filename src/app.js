@@ -139,7 +139,6 @@ const hsParser = (cardname, callback) => {
 	unirest.get(`https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/${cardname}?locale=itIT`)
 	.header("X-Mashape-Key", "QNONu0GxUCmshtEPsWRc3xvZ2EYup11KhpejsnUWCeuk7rphhd")
 	.end(function (result) {
-		console.log(result.body);
 		if(result.status != '200')
 			callback(false,false);
 		else {
@@ -210,6 +209,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 					else
 						message = `${e.message.author.mention}: È stato trovato \`${response.length}\` per la chiave di ricerca \`${parameter}\`.\n`
 					const img = response[0].img;
+					console.log(response[0].img);
 					const filename = path.basename(url.parse(img).pathname);
 					download(img, filename, () => {
 					  e.message.channel.uploadFile(`./img_temp/${filename}`, filename , message);
