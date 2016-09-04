@@ -208,16 +208,17 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 						message = `${e.message.author.mention}: Sono stati trovati \`${response.length}\` per la chiave di ricerca \`${parameter}\`.\n`;
 					else
 						message = `${e.message.author.mention}: È stato trovato \`${response.length}\` per la chiave di ricerca \`${parameter}\`.\n`
-					const img = response[0].img;
-					const jsonfile = require('jsonfile');
-					const file = './public/response.json';
-					const obj = response[0];
-					jsonfile.writeFileSync(file, obj);
-					/*const filename = path.basename(url.parse(img).pathname);
+					let img = response[0].img;
+					let i = 1;
+					while(img != "undefined") {
+						img = response[i].img;
+						i++;
+					}
+					const filename = path.basename(url.parse(img).pathname);
 					download(img, filename, () => {
 					  e.message.channel.uploadFile(`./img_temp/${filename}`, filename , message);
 					  fs.unlink(`./img_temp/${filename}`);
-					});*/
+					});
 				}
 				else {
 					var message = `${e.message.author.mention}: Sono stati trovati \`0\` per la chiave di ricerca \`${parameter}\`.\n`;
