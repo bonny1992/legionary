@@ -399,7 +399,7 @@ app.use('/public', express.static(`${__dirname}/../public`));
 
 app.get('/', (request, response) => {
 	const time_b = new Date();
-	const current_time = `${time_b.getHours()}:${time_b.getMinutes()}:${time_b.getSeconds()}`;
+	const current_time = `${time_b.getHours()+2}:${time_b.getMinutes()}:${time_b.getSeconds()}`;
 	response.render('index', 
 		{ 
 			title: 'Legionary',
