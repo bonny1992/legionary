@@ -16,7 +16,8 @@
     "qbittorrent-client": "*",
     "pug" : "*",
     "ping": "*",
-    "unirest": "*"
+    "unirest": "*",
+    "sleep-async": "*"
   },
   "scripts": {
     "build": "babel src -d lib",

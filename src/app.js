@@ -135,8 +135,8 @@ const download = (uri, filename, callback) => {
 };
 
 const hsParser = (cardname, callback) => {
-	console.log(`GET https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/${cardname}?locale=itIT`);
-	unirest.get(`https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/${cardname}?locale=itIT`)
+	console.log(`GET https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/${cardname}?locale=itIT&collectible=1`);
+	unirest.get(`https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/${cardname}?locale=itIT&collectible=1`)
 	.header("X-Mashape-Key", "QNONu0GxUCmshtEPsWRc3xvZ2EYup11KhpejsnUWCeuk7rphhd")
 	.end(function (result) {
 		if(result.status != '200')
@@ -148,6 +148,18 @@ const hsParser = (cardname, callback) => {
 }
 
 
+const filedelete = (imagepath) => {
+	const sleep = require('sleep-async')();
+	sleep.sleep(120000, () => {
+	  fs.unlink(imagepath, (error) => {
+	  	if(error) {
+	  		console.log(`Impossibile eliminare ${imagepath}`);
+	  	}
+	  	else
+	  		console.log(`DELETED ${imagepath}`);
+	  });
+	});
+}
 
 
 const settings = readSettings();
@@ -187,7 +199,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 				KeepAlive();
 			}, 600000);
 			e.message.channel.sendMessage(`${e.message.author.mention}: Hai attivato con successo il comando di \`keepalive\`, che **dovrebbe** mantenere acceso il bot su Heroku!`);
-			var milliseconds = new Date(600000);
+			let milliseconds = new Date(600000);
 			console.log(`Log: Keepalive enabled | ${milliseconds.getMinutes()} m`);	
 		}
 	}
@@ -233,7 +245,9 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 							  	});
 							  	other_cards += `\`\`\``;
 							  	e.message.channel.sendMessage(other_cards);
-							  	fs.unlink(`./img_temp/${filename}`);
+							  	let ms = new Date(120000);
+							  	console.log(`PENDING DELETION ./img_temp/${filename} (${ms.getMinutes()} min)`);
+							  	filedelete(`./img_temp/${filename}`);
 							  }
 							  else if (response.length > 50) {
 							  	let other_cards = `Troppi risultati per visualizzarne una lista!`;
