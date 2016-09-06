@@ -4,7 +4,7 @@ import request from 'request';
 import unirest from 'unirest';
 import url from 'url';
 import path from 'path';
-const commands_runned = 0;
+let commands_runned = 0;
 const time = new Date();
 const time_executed = `${time.getHours()+2}:${time.getMinutes()}:${time.getSeconds()}`;
 let timer;
