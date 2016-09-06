@@ -184,17 +184,20 @@ client.Dispatcher.on("GATEWAY_READY", e => {
 client.Dispatcher.on("MESSAGE_CREATE", e => {
 	if(e.message.content.split(' ')[0] == '!dio')
 		bestParser(text => {
+			commands_runned++;
 			if(text != undefined)
 				e.message.channel.sendMessage(`\`${text}\``);
 			});
 	else if(e.message.content.split(' ')[0] == '!keepalive') {
 		if(timer) {
+			commands_runned++;
 			clearTimeout(timer);
 			timer = "";
 			e.message.channel.sendMessage(`${e.message.author.mention}: Hai disattivato con successo il comando di \`keepalive\`!`);
 			console.log(`Log: Keepalive disabled`);
 		}
 		else {
+			commands_runned++;
 			timer = setTimeout(() => {
 				KeepAlive();
 			}, 600000);
@@ -245,23 +248,27 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 							  	});
 							  	other_cards += `\`\`\``;
 							  	e.message.channel.sendMessage(other_cards);
+							  	commands_runned++;
 							  	let ms = new Date(120000);
 							  	console.log(`PENDING DELETION ./img_temp/${filename} (${ms.getMinutes()} min)`);
 							  	filedelete(`./img_temp/${filename}`);
 							  }
 							  else if (response.length > 50) {
 							  	let other_cards = `Troppi risultati per visualizzarne una lista!`;
+							  	commands_runned++;
 							  	e.message.channel.sendMessage(other_cards);
 							  }
 							});
 						}
 						else {
 							var message = `${e.message.author.mention}: Non sono state trovate immagini per la chiave di ricerca \`${parameter}\`.\n`;
+							commands_runned++;
 							e.message.channel.sendMessage(message);
 						}
 					}
 					else {
 						var message = `${e.message.author.mention}: Sono stati trovati \`0\` risultati per la chiave di ricerca \`${parameter}\`.\n`;
+						commands_runned++;
 						e.message.channel.sendMessage(message);
 					}
 				});
@@ -284,6 +291,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 				// ###############################################################
 				case '!checkperm':
 					e.message.channel.sendMessage(`${e.message.author.mention}: Fai parte del ruolo ${settings['torrent_role']}`);
+					commands_runned++;
 					break;
 				case '!setchannel':
 					checkSettingsChannel(settings, channel_settings_condition => {
@@ -294,6 +302,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 										if(channel_condition) {
 											settings['torrent_channel'] = message[1];
 											e.message.channel.sendMessage(`${e.message.author.mention}: Hai impostato con successo il canale **${message[1]}** come predefinito per i torrent!`);
+											commands_runned++;
 											writeSettings(settings);
 										}
 										else 
@@ -306,6 +315,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 						}
 						else {
 							e.message.channel.sendMessage(`${e.message.author.mention}: Hai cancellato con successo il canale **${settings['torrent_channel']}** come predefinito per i torrent!`);
+							commands_runned++;
 							settings['torrent_channel'] = 'none';
 							writeSettings(settings);
 						}
@@ -326,6 +336,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 											});
 											big_message += '```'
 											e.message.channel.sendMessage(big_message);
+											commands_runned++;
 										}
 									});
 							}
@@ -356,6 +367,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 																console.log(log_string);
 																const big_message = `${e.message.author.mention}: È stato aggiunto il torrent con magnet\n\n\`\`\`${message[1]}\`\`\`\ncon titolo **${parsed.dn}** con successo!`;
 																e.message.channel.sendMessage(big_message);
+																commands_runned++;
 															}
 														});
 
@@ -368,6 +380,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 											else {
 												const big_message = `${e.message.author.mention}: Per utilizzare questo comando, devi seguire questa sintassi:\n\`!addurl url label\`\ndove:\n**url** è il magnet o il link diretto al torrent desiderato\n**label** è una delle label predefinite, ottenibili tramite il comando \`!labels\``;
 												e.message.channel.sendMessage(big_message);
+												commands_runned++;
 											}
 											
 								});
