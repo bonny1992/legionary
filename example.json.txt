@@ -1,0 +1,31 @@
+[
+	{
+		"idserver": "asd", 
+		"command_list": 
+			[{
+				"command": "test", 
+			  	"enabled": "true", 
+			  	"channel_blacklist": ["general", "announcements"], 
+			  	"role_whitelist": ["admin"],
+			  	"other_options": ""
+			 },
+			 {
+			 	"command": "test2", 
+			  	"enabled": "false", 
+			  	"channel_blacklist": ["general", "announcements"], 
+			  	"role_whitelist": ["admin"],
+			  	"other_options": ""
+			 }]
+	},
+	{
+		"idserver": "asd2",
+ 		"command_list": 
+			[{
+				"command": "", 
+			  	"enabled": "true", 
+			  	"channel_blacklist": "[]", 
+			  	"role_whitelist": "[*]"
+			  	"other_options": ""
+			 }]
+	}
+]
